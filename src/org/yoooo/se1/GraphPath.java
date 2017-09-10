@@ -127,5 +127,6 @@ public class GraphPath<V, E> {
      */
     public void addEdge(E edge) {
         mEdgeList.add(edge);
+        mWeightAssigned = false;
     }
 }
