@@ -19,6 +19,7 @@ public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, Wei
     private Map<E, V> mSourceVertexMap = new HashMap<>();
     private Map<E, V> mTargetVertexMap = new HashMap<>();
     private Map<E, Double> mEdgeWeightMap = new HashMap<>();
+    private Map<V, Map<V, E>> mVertexEdgeMap = new HashMap<>();
     private EdgeFactory<V, E> mEdgeFactory;
 
     /**
@@ -62,12 +63,7 @@ public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, Wei
         if (!mOutgoingEdges.containsKey(source) || !mOutgoingEdges.containsKey(target)) {
             return null;
         }
-        for (E edge : mOutgoingEdges.get(source)) {
-            if (mTargetVertexMap.get(edge).equals(target)) {
-                return edge;
-            }
-        }
-        return null;
+        return mVertexEdgeMap.get(source).get(target);
     }
 
     /**
@@ -83,6 +79,7 @@ public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, Wei
         mSourceVertexMap.put(edge, source);
         mTargetVertexMap.put(edge, target);
         mEdgeWeightMap.put(edge, 1.0);
+        mVertexEdgeMap.get(source).put(target, edge);
         return edge;
     }
 
@@ -95,6 +92,7 @@ public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, Wei
             return false;
         }
         mOutgoingEdges.put(v, new HashSet<>());
+        mVertexEdgeMap.put(v, new HashMap<>());
         return true;
     }
 
