@@ -39,7 +39,7 @@ public class GraphPath<V, E> {
      *
      * @return start vertex
      */
-    V getStartVertex() {
+    public V getStartVertex() {
         if (mEdgeList.isEmpty()) {
             return null;
         }
@@ -51,7 +51,7 @@ public class GraphPath<V, E> {
      *
      * @return end vertex
      */
-    V getEndVertex() {
+    public V getEndVertex() {
         if (mEdgeList.isEmpty()) {
             return null;
         }
@@ -63,7 +63,7 @@ public class GraphPath<V, E> {
      *
      * @return list of edges
      */
-    List<E> getEdgeList() {
+    public List<E> getEdgeList() {
         return Collections.unmodifiableList(mEdgeList);
     }
 
@@ -72,7 +72,7 @@ public class GraphPath<V, E> {
      *
      * @return list of vertices
      */
-    List<V> getVertexList() {
+    public List<V> getVertexList() {
         List<V> list = new ArrayList<>();
         if (mEdgeList.isEmpty()) {
             return list;
@@ -89,7 +89,7 @@ public class GraphPath<V, E> {
      *
      * @return weight of this path
      */
-    double getWeight() {
+    public double getWeight() {
         if (mWeightAssigned) {
             return mWeight;
         }
@@ -106,7 +106,7 @@ public class GraphPath<V, E> {
      *
      * @param weight weight of this path
      */
-    void setWeight(double weight) {
+    public void setWeight(double weight) {
         mWeight = weight;
         mWeightAssigned = true;
     }
@@ -116,7 +116,7 @@ public class GraphPath<V, E> {
      *
      * @return length of this path
      */
-    int getLength() {
+    public int getLength() {
         return mEdgeList.size();
     }
 
@@ -125,7 +125,7 @@ public class GraphPath<V, E> {
      *
      * @param edge edge to be added
      */
-    void addEdge(E edge) {
+    public void addEdge(E edge) {
         mEdgeList.add(edge);
     }
 }
