@@ -8,5 +8,6 @@ public class ShowDirectedGraph {
      * @param filename filename of generated picture(without extension)
      */
     public static void showDirectedGraph(SimpleDirectedWeightGraph<String, Integer> graph, String filename) {
+
     }
 }
