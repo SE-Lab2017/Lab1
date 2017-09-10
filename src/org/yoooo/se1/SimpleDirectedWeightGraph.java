@@ -21,6 +21,11 @@ public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, Wei
     private Map<E, Double> mEdgeWeightMap = new HashMap<>();
     private EdgeFactory<V, E> mEdgeFactory;
 
+    /**
+     * Creates a new simple directed graph.
+     *
+     * @param edgeFactory edge factory of the new graph.
+     */
     public SimpleDirectedWeightGraph(@NotNull EdgeFactory<V, E> edgeFactory) {
         mEdgeFactory = edgeFactory;
     }
