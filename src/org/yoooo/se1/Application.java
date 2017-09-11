@@ -31,11 +31,11 @@ public class Application {
         Scanner scanner = new Scanner(string);
         SimpleDirectedWeightGraph<String, Integer> graph = new SimpleDirectedWeightGraph<>(
                 new EdgeFactory<String, Integer>() {
-                    int next;
+                    private int mNext;
 
                     @Override
                     public Integer createEdge(String source, String target) {
-                        return next++;
+                        return mNext++;
                     }
                 });
         if (!scanner.hasNext()) {
