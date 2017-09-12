@@ -17,6 +17,8 @@ public class Application {
     private static final String COMMAND_HELP = String.join(System.lineSeparator(),
             "help, h  show this help",
             "show-graph, sg filename  show graph from input file and save to filename.png",
+            "bridge-words, bw word1 word2  query bridge words from word1 to word2",
+            "new-text, nt inputText  generate new text according to bridge words",
             "shortest-path, sp source sink  calculate shortest path from source to sink",
             "random-walk, rw filename  walk randomly and store result to filename.txt");
     private Graph<String, Integer> mGraph;
@@ -52,6 +54,18 @@ public class Application {
                 case "sg":
                 case "show-graph":
                     Main.showDirectedGraph(getGraph(), scanner.next());
+                    break;
+                case "bw":
+                case "bridge-words":
+                    System.out.println(QueryBridgeWords.queryBridgeWords(scanner.next(), scanner.next()));
+                    break;
+                case "nt":
+                case "new-text":
+                    String inputText;
+                    do {
+                        inputText = convertInputFileContent(scanner.nextLine()).trim();
+                    } while (inputText.isEmpty());
+                    System.out.println(GenerateNewText.generateNewText(inputText));
                     break;
                 case "sp":
                 case "shortest-path":
