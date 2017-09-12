@@ -37,7 +37,11 @@ public class ShowDirectedGraph {
             throw new RuntimeException("fail to open " + filename + ".dot");
         }
         try {
-            Runtime.getRuntime().exec("dot -Tpng -o" + filename + ".png " + filename + ".dot");
+            try {
+                Runtime.getRuntime().exec("dot -Tpng -o" + filename + ".png " + filename + ".dot").waitFor();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Desktop.getDesktop().open(new File(filename + ".png"));
         } catch (IOException e) {
             throw new RuntimeException("file to write " + filename + ".png");
