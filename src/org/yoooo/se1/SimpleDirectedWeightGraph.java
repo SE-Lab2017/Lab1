@@ -119,4 +119,12 @@ public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, Wei
     public double getEdgeWeight(E e) {
         return mEdgeWeightMap.get(e);
     }
+
+    /**
+     * @see Graph#vertexSet()
+     */
+    @Override
+    public Set<V> vertexSet() {
+        return Collections.unmodifiableSet(mOutgoingEdges.keySet());
+    }
 }

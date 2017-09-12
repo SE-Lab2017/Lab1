@@ -1,5 +1,7 @@
 package org.yoooo.se1;
 
+import java.util.Set;
+
 /**
  * The root interface in the graph hierarchy.
  *
@@ -60,4 +62,11 @@ public interface Graph<V, E> {
     default double getEdgeWeight(E e) {
         return 1;
     }
+
+    /**
+     * Returns a set of the vertices contained in this graph.
+     *
+     * @return set of vertices
+     */
+    Set<V> vertexSet();
 }
