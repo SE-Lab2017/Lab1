@@ -20,7 +20,8 @@ public class Application {
             "query-bridge, qb word1 word2  query bridge words from word1 to word2",
             "generate-text, gt  generate new text with next line of input",
             "shortest-path, sp source sink  calculate shortest path from source to sink",
-            "random-walk, rw filename  walk randomly and store result to filename.txt");
+            "random-walk, rw filename  walk randomly and store result to filename.txt",
+            "exit, e  exit program");
     private Graph<String, Integer> mGraph;
     private Random mRandom = new Random(System.currentTimeMillis());
 
@@ -44,8 +45,10 @@ public class Application {
         input = convertInputFileContent(input);
         mGraph = stringToGraph(input);
         Scanner scanner = new Scanner(System.in);
+        System.out.println(COMMAND_HELP);
         while (scanner.hasNext()) {
             String command = scanner.next();
+            if (command.equals("e") || command.equals("exit")) break;
             switch (command) {
                 case "h":
                 case "help":
@@ -61,8 +64,11 @@ public class Application {
                     break;
                 case "gt":
                 case "generate-text":
-                    scanner.nextLine();
-                    System.out.println(Main.generateNewText(scanner.nextLine()));
+                    String inputText;
+                    do {
+                        inputText = convertInputFileContent(scanner.nextLine());
+                    } while (inputText.isEmpty());
+                    System.out.println(Main.generateNewText(inputText));
                     break;
                 case "sp":
                 case "shortest-path":
@@ -162,6 +168,6 @@ public class Application {
                 builder.append(' ');
             }
         }
-        return builder.toString();
+        return builder.toString().trim();
     }
 }
