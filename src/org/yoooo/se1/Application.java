@@ -39,7 +39,7 @@ public class Application {
             if (command.equals("h") || command.equals("help")) {
                 System.out.println(COMMAND_HELP);
             } else if (command.equals("sg") || command.equals("show-graph")) {
-                ShowDirectedGraph.showDirectedGraph(getGraph(), scanner.next());
+                Main.showDirectedGraph(getGraph(), scanner.next());
             }
         }
     }
