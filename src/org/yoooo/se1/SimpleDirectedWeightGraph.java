@@ -9,17 +9,17 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * An implementation of DirectedGraph and WeightedGraph using adjacency list.
+ * An implementation of simple directed weighted using adjacency list.
  *
  * @param <V> the graph vertex type
  * @param <E> the graph edge type
  */
-public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, WeightedGraph<V, E> {
+public class SimpleDirectedWeightGraph<V, E> implements WeightedGraph<V, E> {
     private Map<V, Set<E>> mOutgoingEdges = new HashMap<>();
     private Map<E, V> mSourceVertexMap = new HashMap<>();
     private Map<E, V> mTargetVertexMap = new HashMap<>();
     private Map<E, Double> mEdgeWeightMap = new HashMap<>();
-    private Map<V, Map<V, E>> mVertexEdgeMap = new HashMap<>();
+    private Map<V, Map<V, E>> mVertexOutEdgeMap = new HashMap<>();
     private EdgeFactory<V, E> mEdgeFactory;
 
     /**
@@ -32,7 +32,7 @@ public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, Wei
     }
 
     /**
-     * @see DirectedGraph#outgoingEdgesOf(Object)
+     * @see Graph#outgoingEdgesOf(Object)
      */
     @Override
     public Set<E> outgoingEdgesOf(V v) {
@@ -63,7 +63,7 @@ public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, Wei
         if (!mOutgoingEdges.containsKey(source) || !mOutgoingEdges.containsKey(target)) {
             return null;
         }
-        return mVertexEdgeMap.get(source).get(target);
+        return mVertexOutEdgeMap.get(source).get(target);
     }
 
     /**
@@ -79,7 +79,7 @@ public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, Wei
         mSourceVertexMap.put(edge, source);
         mTargetVertexMap.put(edge, target);
         mEdgeWeightMap.put(edge, 1.0);
-        mVertexEdgeMap.get(source).put(target, edge);
+        mVertexOutEdgeMap.get(source).put(target, edge);
         return edge;
     }
 
@@ -92,7 +92,7 @@ public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, Wei
             return false;
         }
         mOutgoingEdges.put(v, new HashSet<>());
-        mVertexEdgeMap.put(v, new HashMap<>());
+        mVertexOutEdgeMap.put(v, new HashMap<>());
         return true;
     }
 
@@ -126,5 +126,13 @@ public class SimpleDirectedWeightGraph<V, E> implements DirectedGraph<V, E>, Wei
     @Override
     public Set<V> vertexSet() {
         return Collections.unmodifiableSet(mOutgoingEdges.keySet());
+    }
+
+    /**
+     * @see Graph#outDegreeOf(Object)
+     */
+    @Override
+    public int outDegreeOf(V v) {
+        return 0;
     }
 }

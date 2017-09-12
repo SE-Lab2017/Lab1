@@ -38,6 +38,22 @@ public interface Graph<V, E> {
     boolean addVertex(V v);
 
     /**
+     * Returns a set of all edges outgoing from the vertex.
+     *
+     * @param v the vertex
+     * @return the set of edges
+     */
+    Set<E> outgoingEdgesOf(V v);
+
+    /**
+     * Returns the number of outgoing edges from the specified vertex.
+     *
+     * @param v vertex whose degree is queried
+     * @return the degree of the vertex
+     */
+    int outDegreeOf(V v);
+
+    /**
      * Returns the source vertex of an edge.
      *
      * @param e edge
