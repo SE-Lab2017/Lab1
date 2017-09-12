@@ -7,6 +7,12 @@ import java.util.Random;
 import java.util.Set;
 
 public class RandomWalk {
+    /**
+     * Returns a trail by walking in graph randomly until no outgoing edges or visited edge is
+     * encountered, represented by vertices joined by spaces.
+     *
+     * @return random trail represented by vertices joined by spaces.
+     */
     public static String randomWalk() {
         Graph<String, Integer> graph = Application.getInstance().getGraph();
         String[] vertices = graph.vertexSet().toArray(new String[0]);
