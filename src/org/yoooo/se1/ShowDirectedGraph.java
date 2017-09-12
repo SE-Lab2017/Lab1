@@ -12,7 +12,7 @@ public class ShowDirectedGraph {
      * @param filename filename of generated picture(without extension)
      * @exception RuntimeException throw when file operation failed
      */
-    public static void showDirectedGraph(SimpleDirectedWeightGraph<String, Integer> graph, String filename) throws RuntimeException{
+    public static void showDirectedGraph(Graph<String, Integer> graph, String filename) throws RuntimeException{
         StringBuilder dotContent = new StringBuilder();
         dotContent.append(String.format("digraph {%n"));
         Set<String> vertexSet = graph.vertexSet();

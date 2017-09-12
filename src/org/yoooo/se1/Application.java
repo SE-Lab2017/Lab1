@@ -10,6 +10,9 @@ public class Application {
     private static final String HELP = String.join(System.lineSeparator(),
             "Usage:",
             " program input.txt");
+    private static final String COMMAND_HELP = String.join(System.lineSeparator(),
+            "help, h  show this help",
+            "show-graph, sg  show graph from input file");
     private Graph<String, Integer> mGraph;
 
     /**
@@ -31,10 +34,19 @@ public class Application {
         }
         input = convertInputFileContent(input);
         mGraph = stringToGraph(input);
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            String command = scanner.next();
+            if (command.equals("h") || command.equals("help")) {
+                System.out.println(COMMAND_HELP);
+            } else if (command.equals("sg") || command.equals("show-graph")) {
+                ShowDirectedGraph.showDirectedGraph(getGraph(), scanner.next());
+            }
+        }
     }
 
     public Graph<String, Integer> getGraph() {
-        return null;
+        return mGraph;
     }
 
     private static Application sInstance = new Application();
@@ -71,6 +83,7 @@ public class Application {
             } else {
                 graph.addEdge(prev, vertex);
             }
+            prev = vertex;
         }
         return graph;
     }
