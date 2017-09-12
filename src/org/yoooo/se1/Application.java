@@ -1,9 +1,8 @@
 package org.yoooo.se1;
 
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.util.List;
+import java.io.Reader;
 import java.util.Scanner;
 
 public class Application {
@@ -90,9 +89,11 @@ public class Application {
 
     private String readFile(String path) throws IOException {
         StringBuilder builder = new StringBuilder();
-        List<String> lines = Files.readAllLines(FileSystems.getDefault().getPath(path));
-        for (String line : lines) {
-            builder.append(line).append(System.lineSeparator());
+        Reader reader = new FileReader(path);
+        char[] buffer = new char[0x10000];
+        int count;
+        while ((count = reader.read(buffer)) != -1) {
+            builder.append(buffer, 0, count);
         }
         return builder.toString();
     }
