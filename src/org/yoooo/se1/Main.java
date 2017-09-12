@@ -9,6 +9,14 @@ public class Main {
         ShowDirectedGraph.showDirectedGraph(graph, path);
     }
 
+    public static String queryBridgeWords(String word1, String word2) {
+        return QueryBridgeWords.queryBridgeWords(word1, word2);
+    }
+
+    public static String generateNewText(String inputText) {
+        return GenerateNewText.generateNewText(inputText);
+    }
+
     public static String calcShortestPath(String source, String sink) {
         return CalcShortestPath.calcShortestPath(source, sink);
     }
