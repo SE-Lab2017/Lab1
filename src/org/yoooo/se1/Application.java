@@ -3,6 +3,7 @@ package org.yoooo.se1;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Application {
@@ -14,6 +15,7 @@ public class Application {
             "show-graph, sg filename  show graph from input file and save to filename.png",
             "shortest-path, sp source sink  calculate shortest path from source to sink");
     private Graph<String, Integer> mGraph;
+    private Random mRandom = new Random(System.currentTimeMillis());
 
     /**
      * Entry point for entire application. Should only be called from main.
@@ -56,6 +58,10 @@ public class Application {
 
     public Graph<String, Integer> getGraph() {
         return mGraph;
+    }
+
+    public Random getRandom() {
+        return mRandom;
     }
 
     private static Application sInstance = new Application();
