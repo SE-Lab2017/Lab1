@@ -12,4 +12,8 @@ public class Main {
     public static String calcShortestPath(String source, String sink) {
         return CalcShortestPath.calcShortestPath(source, sink);
     }
+
+    public static String randomWalk() {
+        return RandomWalk.randomWalk();
+    }
 }

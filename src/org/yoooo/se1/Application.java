@@ -1,8 +1,12 @@
 package org.yoooo.se1;
 
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,7 +17,8 @@ public class Application {
     private static final String COMMAND_HELP = String.join(System.lineSeparator(),
             "help, h  show this help",
             "show-graph, sg filename  show graph from input file and save to filename.png",
-            "shortest-path, sp source sink  calculate shortest path from source to sink");
+            "shortest-path, sp source sink  calculate shortest path from source to sink",
+            "random-walk, rw filename  walk randomly and store result to filename.txt");
     private Graph<String, Integer> mGraph;
     private Random mRandom = new Random(System.currentTimeMillis());
 
@@ -31,7 +36,7 @@ public class Application {
         try {
             input = readFile(args[0]);
         } catch (IOException e) {
-            System.out.println("IO error while reading input file: " + args[0]);
+            System.err.println("IO error while reading input file: " + args[0]);
             return;
         }
         input = convertInputFileContent(input);
@@ -51,6 +56,15 @@ public class Application {
                 case "sp":
                 case "shortest-path":
                     System.out.println(Main.calcShortestPath(scanner.next(), scanner.next()));
+                    break;
+                case "rw":
+                case "random-walk":
+                    String path = scanner.next() + ".txt";
+                    try {
+                        writeFile(path, Main.randomWalk());
+                    } catch (IOException e) {
+                        System.err.println("IO error while writing file: " + path);
+                    }
                     break;
             }
         }
@@ -105,13 +119,23 @@ public class Application {
 
     private String readFile(String path) throws IOException {
         StringBuilder builder = new StringBuilder();
-        Reader reader = new FileReader(path);
-        char[] buffer = new char[0x10000];
-        int count;
-        while ((count = reader.read(buffer)) != -1) {
-            builder.append(buffer, 0, count);
+        try (Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8")) {
+            char[] buffer = new char[0x10000];
+            int count;
+            while ((count = reader.read(buffer)) != -1) {
+                builder.append(buffer, 0, count);
+            }
+            return builder.toString();
         }
-        return builder.toString();
+    }
+
+    private void writeFile(String path, String content) throws IOException {
+        try {
+            byte[] bytes = content.getBytes("UTF-8");
+            Files.write(FileSystems.getDefault().getPath(path), bytes);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     private String convertInputFileContent(String input) {
