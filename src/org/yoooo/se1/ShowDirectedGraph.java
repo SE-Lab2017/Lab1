@@ -1,5 +1,7 @@
 package org.yoooo.se1;
 
+import java.awt.*;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Set;
@@ -36,6 +38,7 @@ public class ShowDirectedGraph {
         }
         try {
             Runtime.getRuntime().exec("dot -Tpng -o" + filename + ".png " + filename + ".dot");
+            Desktop.getDesktop().open(new File(filename + ".png"));
         } catch (IOException e) {
             throw new RuntimeException("file to write " + filename + ".png");
         }
