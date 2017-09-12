@@ -11,7 +11,8 @@ public class Application {
             " program input.txt");
     private static final String COMMAND_HELP = String.join(System.lineSeparator(),
             "help, h  show this help",
-            "show-graph, sg filename  show graph from input file and save to filename.png");
+            "show-graph, sg filename  show graph from input file and save to filename.png",
+            "shortest-path, sp source sink  calculate shortest path from source to sink");
     private Graph<String, Integer> mGraph;
 
     /**
@@ -36,10 +37,19 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             String command = scanner.next();
-            if (command.equals("h") || command.equals("help")) {
-                System.out.println(COMMAND_HELP);
-            } else if (command.equals("sg") || command.equals("show-graph")) {
-                Main.showDirectedGraph(getGraph(), scanner.next());
+            switch (command) {
+                case "h":
+                case "help":
+                    System.out.println(COMMAND_HELP);
+                    break;
+                case "sg":
+                case "show-graph":
+                    Main.showDirectedGraph(getGraph(), scanner.next());
+                    break;
+                case "sp":
+                case "shortest-path":
+                    System.out.println(Main.calcShortestPath(scanner.next(), scanner.next()));
+                    break;
             }
         }
     }
