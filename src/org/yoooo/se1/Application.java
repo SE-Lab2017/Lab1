@@ -12,7 +12,7 @@ public class Application {
             " program input.txt");
     private static final String COMMAND_HELP = String.join(System.lineSeparator(),
             "help, h  show this help",
-            "show-graph, sg  show graph from input file");
+            "show-graph, sg filename  show graph from input file and save to filename.png");
     private Graph<String, Integer> mGraph;
 
     /**
