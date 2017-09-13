@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * A implementation of Dijkstra's shortest path algorithm.
@@ -33,14 +32,24 @@ public class DijkstraShortestPath<V, E> {
      * @return a shortest path or null if no path exists
      */
     public GraphPath<V, E> getPath(V source, V sink) {
+        return getPaths(source).getPath(sink);
+    }
+
+    /**
+     * Returns all shortest paths starting from a single source vertex.
+     *
+     * @param source source vertex
+     * @return shortest paths
+     */
+    public SingleSourcePaths<V, E> getPaths(V source) {
         Set<V> vertices = mGraph.vertexSet();
-        if (!vertices.contains(source) || !vertices.contains(sink) || source.equals(sink)) {
+        if (!vertices.contains(source)) {
             return null;
         }
         PriorityQueue<Node> queue = new PriorityQueue<>(
                 (Comparator<Node>) (lhs, rhs) -> -Double.compare(lhs.distance, rhs.distance));
         Map<V, Double> distanceMap = new HashMap<>();
-        Map<V, V> predecessorMap = new HashMap<>();
+        Map<V, E> predecessorMap = new HashMap<>();
         for (V vertex : vertices) {
             distanceMap.put(vertex, Double.POSITIVE_INFINITY);
             queue.add(new Node(Double.POSITIVE_INFINITY, vertex));
@@ -59,29 +68,12 @@ public class DijkstraShortestPath<V, E> {
                 double alt = distanceMap.get(u) + mGraph.getEdgeWeight(edge);
                 if (alt < distanceMap.get(v)) {
                     distanceMap.put(v, alt);
-                    predecessorMap.put(v, u);
+                    predecessorMap.put(v, edge);
                     queue.add(new Node(alt, v));
                 }
             }
         }
-        Stack<V> stack = new Stack<>();
-        V vertex = sink;
-        stack.push(vertex);
-        while (!vertex.equals(source)) {
-            if (!predecessorMap.containsKey(vertex)) {
-                return null;
-            }
-            vertex = predecessorMap.get(vertex);
-            stack.push(vertex);
-        }
-        GraphPath<V, E> path = new GraphPath<>(mGraph);
-        vertex = stack.pop();
-        while (!stack.isEmpty()) {
-            V next = stack.pop();
-            path.addEdge(mGraph.getEdge(vertex, next));
-            vertex = next;
-        }
-        return path;
+        return new SingleSourcePaths<>(mGraph, source, predecessorMap);
     }
 
     private class Node {
