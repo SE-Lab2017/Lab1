@@ -64,11 +64,13 @@ public class Application {
                     break;
                 case "gt":
                 case "generate-text":
-                    String inputText;
+                    String inputText = null;
                     do {
+                        if (!scanner.hasNextLine()) break;
                         inputText = convertInputFileContent(scanner.nextLine());
                     } while (inputText.isEmpty());
-                    System.out.println(Main.generateNewText(inputText));
+                    if (inputText != null)
+                        System.out.println(Main.generateNewText(inputText));
                     break;
                 case "sp":
                 case "shortest-path":
