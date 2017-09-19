@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.UUID;
 
 public class Application {
@@ -84,11 +85,14 @@ public class Application {
                 case "spa":
                 case "shortest-path-all":
                     try {
+                        String source = scanner.next();
                         SingleSourcePaths<String, Integer> paths =
-                                CalcShortestPath.calcShortestPath(scanner.next());
+                                CalcShortestPath.calcShortestPath(source);
                         Map<String, Integer> predecessorMap = paths.getPredecessorMap();
+                        Set<String> vertices = new HashSet<>(predecessorMap.keySet());
+                        vertices.add(source);
                         ShowDirectedGraph.showDirectedGraph(getGraph(),
-                                UUID.randomUUID().toString(), predecessorMap.keySet(),
+                                UUID.randomUUID().toString(), vertices,
                                 new HashSet<>(predecessorMap.values()));
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
