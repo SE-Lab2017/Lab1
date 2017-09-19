@@ -7,8 +7,11 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Application {
     private static final String HELP = String.join(System.lineSeparator(),
@@ -20,6 +23,8 @@ public class Application {
             "query-bridge, qb word1 word2  query bridge words from word1 to word2",
             "generate-text, gt  generate new text with next line of input",
             "shortest-path, sp source sink  calculate shortest path from source to sink",
+            "shortest-path-all, spa source  calculate shortest path from source to all other " +
+                    "vertices",
             "random-walk, rw filename  walk randomly and store result to filename.txt",
             "exit, e  exit program");
     private Graph<String, Integer> mGraph;
@@ -75,6 +80,19 @@ public class Application {
                 case "sp":
                 case "shortest-path":
                     System.out.println(Main.calcShortestPath(scanner.next(), scanner.next()));
+                    break;
+                case "spa":
+                case "shortest-path-all":
+                    try {
+                        SingleSourcePaths<String, Integer> paths =
+                                CalcShortestPath.calcShortestPath(scanner.next());
+                        Map<String, Integer> predecessorMap = paths.getPredecessorMap();
+                        ShowDirectedGraph.showDirectedGraph(getGraph(),
+                                UUID.randomUUID().toString(), predecessorMap.keySet(),
+                                new HashSet<>(predecessorMap.values()));
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case "rw":
                 case "random-walk":

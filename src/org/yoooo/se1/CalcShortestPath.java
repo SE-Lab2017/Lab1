@@ -1,6 +1,8 @@
 package org.yoooo.se1;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class CalcShortestPath {
     /**
@@ -8,7 +10,7 @@ public class CalcShortestPath {
      * or "Unreachable" sink is not reachable from source.
      *
      * @param source source vertex
-     * @param sink sink vertex
+     * @param sink   sink vertex
      * @return shortest path represented by vertices joined by "->"
      */
     public static String calcShortestPath(String source, String sink) {
@@ -25,6 +27,25 @@ public class CalcShortestPath {
         if (path == null) {
             return "Unreachable";
         }
+        ShowDirectedGraph.showDirectedGraph(Application.getInstance().getGraph(),
+                UUID.randomUUID().toString(), new HashSet<>(path.getVertexList()),
+                new HashSet<>(path.getEdgeList()));
         return String.join("->", path.getVertexList());
+    }
+
+    /**
+     * Returns the shortest path from source to all other vertices.
+     *
+     * @param source source vertex
+     * @return shortest path to other vertices
+     */
+    public static SingleSourcePaths<String, Integer> calcShortestPath(String source) {
+        Set<String> vertices = Application.getInstance().getGraph().vertexSet();
+        if (!vertices.contains(source)) {
+            throw new IllegalArgumentException(source + " does not exist");
+        }
+        DijkstraShortestPath<String, Integer> algorithm = new DijkstraShortestPath<>(
+                Application.getInstance().getGraph());
+        return algorithm.getPaths(source);
     }
 }
