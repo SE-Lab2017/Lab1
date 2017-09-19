@@ -1,5 +1,6 @@
 package org.yoooo.se1;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -20,6 +21,12 @@ public class CalcShortestPath {
         }
         if (!vertices.contains(sink)) {
             return sink + " does not exist";
+        }
+        if (source.equals(sink)) {
+            ShowDirectedGraph.showDirectedGraph(Application.getInstance().getGraph(),
+                    UUID.randomUUID().toString(), Collections.singleton(source),
+                    Collections.emptySet());
+            return source;
         }
         DijkstraShortestPath<String, Integer> algorithm = new DijkstraShortestPath<>(
                 Application.getInstance().getGraph());
