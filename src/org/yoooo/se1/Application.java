@@ -180,6 +180,10 @@ public class Application {
     }
 
     private String convertInputFileContent(String input) {
-        return input.replaceAll("[^a-zA-Z]+", " ").trim();
+        StringBuilder builder = new StringBuilder(input.replaceAll("[^a-zA-Z]+", " ").trim());
+        for (int i = 0; i < builder.length(); ++i)
+            if (Character.isUpperCase(builder.charAt(i)))
+                builder.setCharAt(i, Character.toLowerCase(builder.charAt(i)));
+        return builder.toString();
     }
 }
