@@ -180,18 +180,6 @@ public class Application {
     }
 
     private String convertInputFileContent(String input) {
-        StringBuilder builder = new StringBuilder();
-        for (char ch : input.toCharArray()) {
-            if (Character.isLetter(ch)) {
-                if (Character.isUpperCase(ch)) {
-                    builder.append(Character.toLowerCase(ch));
-                } else {
-                    builder.append(ch);
-                }
-            } else {
-                builder.append(' ');
-            }
-        }
-        return builder.toString().trim();
+        return input.replaceAll("[^a-zA-Z]+", " ").trim();
     }
 }
