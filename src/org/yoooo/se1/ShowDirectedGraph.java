@@ -50,10 +50,10 @@ public class ShowDirectedGraph {
             try {
                 writer.write(getDotContent(graph, coloredVertex, coloredEdge));
             } catch (IOException e) {
-                throw new RuntimeException("fail to write " + filename + ".dot");
+                throw new NoticeException("fail to write " + filename + ".dot");
             }
         } catch (IOException e) {
-            throw new RuntimeException("fail to open " + filename + ".dot");
+            throw new NoticeException("fail to open " + filename + ".dot");
         }
         try {
             try {
@@ -63,7 +63,7 @@ public class ShowDirectedGraph {
             }
             Desktop.getDesktop().open(new File(filename + ".png"));
         } catch (IOException e) {
-            throw new RuntimeException("fail to write " + filename + ".png");
+            throw new NoticeException("fail to write " + filename + ".png");
         }
     }
     /**

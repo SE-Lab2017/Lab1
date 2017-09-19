@@ -2,7 +2,11 @@ package org.yoooo.se1;
 
 public class Main {
     public static void main(String[] args) {
-        Application.getInstance().run(args);
+        try {
+            Application.getInstance().run(args);
+        } catch (NoticeException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public static void showDirectedGraph(Graph<String, Integer> graph, String path) {
