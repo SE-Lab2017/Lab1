@@ -31,7 +31,7 @@ public class ShowDirectedGraph {
         }
         if (coloredVertex != null)
             for (String currentVertex : coloredVertex)
-                dotContent.append(String.format("\t%s [style = filled, fillcolor = lightskyblue]%n", currentVertex));
+                dotContent.append(String.format("\t%s [style = filled, fillcolor = greenyellow]%n", currentVertex));
         dotContent.append(String.format("}%n"));
         return dotContent.toString();
     }
