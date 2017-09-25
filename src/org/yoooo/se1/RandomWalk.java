@@ -1,10 +1,6 @@
 package org.yoooo.se1;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class RandomWalk {
     /**
@@ -27,12 +23,13 @@ public class RandomWalk {
                 break;
             }
             Integer edge = edges[random.nextInt(edges.length)];
+            result.add(graph.getEdgeTarget(edge));
             if (visited.contains(edge)) {
                 break;
             }
             visited.add(edge);
-            result.add(graph.getEdgeTarget(edge));
         }
+        ShowDirectedGraph.showDirectedGraph(graph, UUID.randomUUID().toString(), new HashSet<>(result), visited);
         return String.join(" ", result);
     }
 }

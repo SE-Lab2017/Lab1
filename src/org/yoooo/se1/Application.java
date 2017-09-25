@@ -7,12 +7,7 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class Application {
     private static final String HELP = String.join(System.lineSeparator(),
@@ -89,6 +84,20 @@ public class Application {
                         SingleSourcePaths<String, Integer> paths =
                                 CalcShortestPath.calcShortestPath(source);
                         Map<String, Integer> predecessorMap = paths.getPredecessorMap();
+                        List<String> words = new ArrayList<>(predecessorMap.keySet());
+                        Collections.sort(words);
+                        for (String sink : words) {
+                            List<String> path = new ArrayList<>();
+                            String currentVertex = sink;
+                            while (!currentVertex.equals(source)) {
+                                path.add(currentVertex);
+                                currentVertex = mGraph.getEdgeSource(predecessorMap.get(currentVertex));
+                            }
+                            System.out.print(source);
+                            for (ListIterator<String> iterator = path.listIterator(path.size()); iterator.hasPrevious(); )
+                                System.out.print("->" + iterator.previous());
+                            System.out.println();
+                        }
                         Set<String> vertices = new HashSet<>(predecessorMap.keySet());
                         vertices.add(source);
                         ShowDirectedGraph.showDirectedGraph(getGraph(),
