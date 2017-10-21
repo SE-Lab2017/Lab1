@@ -21,7 +21,7 @@ public class SingleSourcePaths<V, E> {
      * @param source the source vertex
      * @param predecessorMap a map contains edge to each vertex
      */
-    public SingleSourcePaths(Graph<V, E> graph, V source, Map<V, E> predecessorMap) {
+    public SingleSourcePaths(final Graph<V, E> graph, final V source, final Map<V, E> predecessorMap) {
         mGraph = graph;
         mSource = source;
         mPredecessorMap = predecessorMap;

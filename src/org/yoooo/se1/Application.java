@@ -7,9 +7,18 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.UUID;
 
-public class Application {
+public final class Application {
     private static final String HELP = String.join(System.lineSeparator(),
             "Usage:",
             " program input.txt");
@@ -19,19 +28,19 @@ public class Application {
             "query-bridge, qb word1 word2  query bridge words from word1 to word2",
             "generate-text, gt  generate new text with next line of input",
             "shortest-path, sp source sink  calculate shortest path from source to sink",
-            "shortest-path-all, spa source  calculate shortest path from source to all other " +
-                    "vertices",
+            "shortest-path-all, spa source  calculate shortest path from source to all other "
+                    + "vertices",
             "random-walk, rw filename  walk randomly and store result to filename.txt",
             "exit, e  exit program");
+    private static final int BUFFER_SIZE = 0x10000;
     private Graph<String, Integer> mGraph;
     private Random mRandom = new Random(System.currentTimeMillis());
-
     /**
      * Entry point for entire application. Should only be called from main.
      *
      * @param args command line arguments
      */
-    public void run(String[] args) {
+    public void run(final String[]  args) {
         if (args.length != 1) {
             System.out.println(HELP);
             return;
@@ -42,14 +51,17 @@ public class Application {
         } catch (IOException e) {
             System.err.println("IO error while reading input file: " + args[0]);
             return;
+
         }
         input = convertInputFileContent(input);
         mGraph = stringToGraph(input);
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, "UTF-8");
         System.out.println(COMMAND_HELP);
         while (scanner.hasNext()) {
             String command = scanner.next();
-            if (command.equals("e") || command.equals("exit")) break;
+            if (command.equals("e") || command.equals("exit")) {
+                break;
+            }
             switch (command) {
                 case "h":
                 case "help":
@@ -67,11 +79,14 @@ public class Application {
                 case "generate-text":
                     String inputText = null;
                     do {
-                        if (!scanner.hasNextLine()) break;
+                        if (!scanner.hasNextLine()) {
+                            break;
+                        }
                         inputText = convertInputFileContent(scanner.nextLine());
                     } while (inputText.isEmpty());
-                    if (inputText != null)
+                    if (inputText != null) {
                         System.out.println(Main.generateNewText(inputText));
+                    }
                     break;
                 case "sp":
                 case "shortest-path":
@@ -94,8 +109,9 @@ public class Application {
                                 currentVertex = mGraph.getEdgeSource(predecessorMap.get(currentVertex));
                             }
                             System.out.print(source);
-                            for (ListIterator<String> iterator = path.listIterator(path.size()); iterator.hasPrevious(); )
+                            for (ListIterator<String> iterator = path.listIterator(path.size()); iterator.hasPrevious();) {
                                 System.out.print("->" + iterator.previous());
+                            }
                             System.out.println();
                         }
                         Set<String> vertices = new HashSet<>(predecessorMap.keySet());
@@ -116,6 +132,7 @@ public class Application {
                         System.err.println("IO error while writing file: " + path);
                     }
                     break;
+                default:
             }
         }
     }
@@ -137,14 +154,14 @@ public class Application {
     private Application() {
     }
 
-    private Graph<String, Integer> stringToGraph(String string) {
+    private Graph<String, Integer> stringToGraph(final String string) {
         Scanner scanner = new Scanner(string);
         SimpleDirectedWeightGraph<String, Integer> graph = new SimpleDirectedWeightGraph<>(
                 new EdgeFactory<String, Integer>() {
                     private int mNext;
 
                     @Override
-                    public Integer createEdge(String source, String target) {
+                    public Integer createEdge(final String source, final String target) {
                         return mNext++;
                     }
                 });
@@ -167,10 +184,10 @@ public class Application {
         return graph;
     }
 
-    private String readFile(String path) throws IOException {
+    private String readFile(final String path) throws IOException {
         StringBuilder builder = new StringBuilder();
         try (Reader reader = new InputStreamReader(new FileInputStream(path), "UTF-8")) {
-            char[] buffer = new char[0x10000];
+            char[] buffer = new char[BUFFER_SIZE];
             int count;
             while ((count = reader.read(buffer)) != -1) {
                 builder.append(buffer, 0, count);
@@ -179,7 +196,7 @@ public class Application {
         }
     }
 
-    private void writeFile(String path, String content) throws IOException {
+    private void writeFile(final String path, final String content) throws IOException {
         try {
             byte[] bytes = content.getBytes("UTF-8");
             Files.write(FileSystems.getDefault().getPath(path), bytes);
@@ -188,11 +205,13 @@ public class Application {
         }
     }
 
-    private String convertInputFileContent(String input) {
+    private String convertInputFileContent(final String input) {
         StringBuilder builder = new StringBuilder(input.replaceAll("[^a-zA-Z]+", " ").trim());
-        for (int i = 0; i < builder.length(); ++i)
-            if (Character.isUpperCase(builder.charAt(i)))
+        for (int i = 0; i < builder.length(); ++i) {
+            if (Character.isUpperCase(builder.charAt(i))) {
                 builder.setCharAt(i, Character.toLowerCase(builder.charAt(i)));
+            }
+        }
         return builder.toString();
     }
 }

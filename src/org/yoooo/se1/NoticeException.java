@@ -4,20 +4,20 @@ public class NoticeException extends RuntimeException {
     public NoticeException() {
     }
 
-    public NoticeException(String message) {
+    public NoticeException(final String message) {
         super(message);
     }
 
-    public NoticeException(String message, Throwable cause) {
+    public NoticeException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
-    public NoticeException(String message, Throwable cause, boolean enableSuppression,
-            boolean writableStackTrace) {
+    public NoticeException(final String message, final Throwable cause, final boolean enableSuppression,
+            final boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 
-    public NoticeException(Throwable cause) {
+    public NoticeException(final Throwable cause) {
         super(cause);
     }
 }

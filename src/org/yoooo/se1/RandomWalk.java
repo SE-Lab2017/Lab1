@@ -1,8 +1,13 @@
 package org.yoooo.se1;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 
-public class RandomWalk {
+public final class RandomWalk {
     /**
      * Returns a trail by walking in graph randomly until no outgoing edges or visited edge is
      * encountered, represented by vertices joined by spaces.
@@ -31,5 +36,7 @@ public class RandomWalk {
         }
         ShowDirectedGraph.showDirectedGraph(graph, UUID.randomUUID().toString(), new HashSet<>(result), visited);
         return String.join(" ", result);
+    }
+    private RandomWalk() {
     }
 }

@@ -8,7 +8,7 @@ package org.yoooo.se1;
  */
 public interface EdgeFactory<V, E> {
     /**
-     * Creates a new edge from source to target
+     * Creates a new edge from source to target.
      *
      * @param source the source vertex
      * @param target the target vertex
