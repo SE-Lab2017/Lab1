@@ -21,7 +21,7 @@ public class GraphPath<V, E> {
      *
      * @param graph graph over which the path is created
      */
-    public GraphPath(Graph<V, E> graph) {
+    public GraphPath(final Graph<V, E> graph) {
         mGraph = graph;
     }
 
@@ -106,7 +106,7 @@ public class GraphPath<V, E> {
      *
      * @param weight weight of this path
      */
-    public void setWeight(double weight) {
+    public void setWeight(final double weight) {
         mWeight = weight;
         mWeightAssigned = true;
     }
@@ -125,7 +125,7 @@ public class GraphPath<V, E> {
      *
      * @param edge edge to be added
      */
-    public void addEdge(E edge) {
+    public void addEdge(final E edge) {
         mEdgeList.add(edge);
         mWeightAssigned = false;
     }

@@ -27,7 +27,7 @@ public class SimpleDirectedWeightGraph<V, E> implements WeightedGraph<V, E> {
      *
      * @param edgeFactory edge factory of the new graph.
      */
-    public SimpleDirectedWeightGraph(@NotNull EdgeFactory<V, E> edgeFactory) {
+    public SimpleDirectedWeightGraph(final @NotNull EdgeFactory<V, E> edgeFactory) {
         mEdgeFactory = edgeFactory;
     }
 
@@ -35,7 +35,7 @@ public class SimpleDirectedWeightGraph<V, E> implements WeightedGraph<V, E> {
      * @see Graph#outgoingEdgesOf(Object)
      */
     @Override
-    public Set<E> outgoingEdgesOf(V v) {
+    public Set<E> outgoingEdgesOf(final V v) {
         if (mOutgoingEdges.containsKey(v)) {
             return Collections.unmodifiableSet(mOutgoingEdges.get(v));
         } else {
@@ -47,7 +47,7 @@ public class SimpleDirectedWeightGraph<V, E> implements WeightedGraph<V, E> {
      * @see WeightedGraph#setEdgeWeight(Object, double)
      */
     @Override
-    public void setEdgeWeight(E e, double weight) {
+    public void setEdgeWeight(final E e, final double weight) {
         if (mEdgeWeightMap.containsKey(e)) {
             mEdgeWeightMap.put(e, weight);
         } else {
@@ -59,7 +59,7 @@ public class SimpleDirectedWeightGraph<V, E> implements WeightedGraph<V, E> {
      * @see Graph#getEdge(Object, Object)
      */
     @Override
-    public E getEdge(V source, V target) {
+    public E getEdge(final V source, final V target) {
         if (!mOutgoingEdges.containsKey(source) || !mOutgoingEdges.containsKey(target)) {
             return null;
         }
@@ -70,7 +70,7 @@ public class SimpleDirectedWeightGraph<V, E> implements WeightedGraph<V, E> {
      * @see Graph#addEdge(Object, Object)
      */
     @Override
-    public E addEdge(V source, V target) {
+    public E addEdge(final V source, final V target) {
         if (!mOutgoingEdges.containsKey(source) || !mOutgoingEdges.containsKey(target)) {
             return null;
         }
@@ -87,7 +87,7 @@ public class SimpleDirectedWeightGraph<V, E> implements WeightedGraph<V, E> {
      * @see Graph#addVertex(Object)
      */
     @Override
-    public boolean addVertex(V v) {
+    public boolean addVertex(final V v) {
         if (mOutgoingEdges.containsKey(v)) {
             return false;
         }
@@ -100,7 +100,7 @@ public class SimpleDirectedWeightGraph<V, E> implements WeightedGraph<V, E> {
      * @see Graph#getEdgeSource(Object)
      */
     @Override
-    public V getEdgeSource(E e) {
+    public V getEdgeSource(final E e) {
         return mSourceVertexMap.get(e);
     }
 
@@ -108,7 +108,7 @@ public class SimpleDirectedWeightGraph<V, E> implements WeightedGraph<V, E> {
      * @see Graph#getEdgeTarget(Object)
      */
     @Override
-    public V getEdgeTarget(E e) {
+    public V getEdgeTarget(final E e) {
         return mTargetVertexMap.get(e);
     }
 
@@ -116,7 +116,7 @@ public class SimpleDirectedWeightGraph<V, E> implements WeightedGraph<V, E> {
      * @see Graph#getEdgeWeight(Object)
      */
     @Override
-    public double getEdgeWeight(E e) {
+    public double getEdgeWeight(final E e) {
         return mEdgeWeightMap.get(e);
     }
 
@@ -132,7 +132,7 @@ public class SimpleDirectedWeightGraph<V, E> implements WeightedGraph<V, E> {
      * @see Graph#outDegreeOf(Object)
      */
     @Override
-    public int outDegreeOf(V v) {
+    public int outDegreeOf(final V v) {
         return 0;
     }
 }
