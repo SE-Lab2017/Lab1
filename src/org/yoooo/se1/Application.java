@@ -22,7 +22,6 @@ public final class Application {
     private static final String HELP = String.join(System.lineSeparator(),
             "Usage:",
             " program input.txt");
-
     private static final String COMMAND_HELP = String.join(System.lineSeparator(),
             "help, h  show this help",
             "show-graph, sg filename  show graph from input file and save to filename.png",
