@@ -40,7 +40,7 @@ public final class Application {
      *
      * @param args command line arguments
      */
-    public void run(final String[]  args) {
+    public void run(final String[] args) {
         if (args.length != 1) {
             System.out.println(HELP);
             return;
@@ -51,7 +51,6 @@ public final class Application {
         } catch (IOException e) {
             System.err.println("IO error while reading input file: " + args[0]);
             return;
-
         }
         input = convertInputFileContent(input);
         mGraph = stringToGraph(input);
