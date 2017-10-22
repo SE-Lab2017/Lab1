@@ -20,7 +20,7 @@ public class DijkstraShortestPath<V, E> {
      *
      * @param graph the graph
      */
-    public DijkstraShortestPath(Graph<V, E> graph) {
+    public DijkstraShortestPath(final Graph<V, E> graph) {
         mGraph = graph;
     }
 
@@ -31,7 +31,7 @@ public class DijkstraShortestPath<V, E> {
      * @param sink sink vertex
      * @return a shortest path or null if no path exists
      */
-    public GraphPath<V, E> getPath(V source, V sink) {
+    public GraphPath<V, E> getPath(final V source, final V sink) {
         return getPaths(source).getPath(sink);
     }
 
@@ -41,7 +41,7 @@ public class DijkstraShortestPath<V, E> {
      * @param source source vertex
      * @return shortest paths
      */
-    public SingleSourcePaths<V, E> getPaths(V source) {
+    public SingleSourcePaths<V, E> getPaths(final V source) {
         Set<V> vertices = mGraph.vertexSet();
         if (!vertices.contains(source)) {
             return null;
@@ -76,13 +76,13 @@ public class DijkstraShortestPath<V, E> {
         return new SingleSourcePaths<>(mGraph, source, predecessorMap);
     }
 
-    private class Node {
+    private final class Node {
         private double distance;
         private V vertex;
 
-        private Node(double distance, V vertex) {
-            this.distance = distance;
-            this.vertex = vertex;
+        private Node(final double dis, final V vex) {
+            this.distance = dis;
+            this.vertex = vex;
         }
     }
 }
