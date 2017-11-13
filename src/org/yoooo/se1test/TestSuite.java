@@ -10,7 +10,8 @@ import org.yoooo.se1.Application;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    SuiteB.class
+    SuiteB.class,
+    SuiteW.class
 })
 public class TestSuite {
 
