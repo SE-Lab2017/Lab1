@@ -57,7 +57,7 @@ public final class QueryBridgeWords {
             return String.format("No bridge words from \"%s\" to \"%s\"!", word1, word2);
         }
         if (bridgeWords.size() == 1) {
-            return String.format("The bridge word from \"%s\" to \"%s\" is: %s", word1, word2, bridgeWords.get(0));
+            return String.format("The bridge word from \"%s\" to \"%s\" is: %s.", word1, word2, bridgeWords.get(0));
         }
         StringBuilder result = new StringBuilder(String.format("The bridge words from \"%s\" to \"%s\" are: ", word1, word2));
         ListIterator<String> i = bridgeWords.listIterator();
