@@ -18,7 +18,7 @@ public final class GenerateNewText {
         StringBuilder result = new StringBuilder(words[0]);
         Random random = Application.getInstance().getRandom();
         for (int i = 1; i < words.length; ++i) {
-            List<String> bridgeWords = QueryBridgeWords.getBridgeWords(words[i - 1], words[i]);
+            List<String> bridgeWords = new QueryBridgeWords().getBridgeWords(words[i - 1], words[i]);
             if (bridgeWords != null && !bridgeWords.isEmpty()) {
                 result.append(" ");
                 result.append(bridgeWords.get(random.nextInt(bridgeWords.size())));

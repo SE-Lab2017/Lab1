@@ -1,9 +1,9 @@
 package org.yoooo.se1test;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 import org.yoooo.se1.QueryBridgeWords;
+
+import static org.junit.Assert.assertEquals;
 
 public class QueryBridgeWordsTest5 {
 
@@ -14,8 +14,8 @@ public class QueryBridgeWordsTest5 {
 
     @Test
     public void test() {
-        assertEquals(expected, QueryBridgeWords.queryBridgeWords(wordL, wordR));
-        assertEquals(expectedRev, QueryBridgeWords.queryBridgeWords(wordR, wordL));
+        assertEquals(expected, new QueryBridgeWords().queryBridgeWords(wordL, wordR));
+        assertEquals(expectedRev, new QueryBridgeWords().queryBridgeWords(wordR, wordL));
     }
 
 }

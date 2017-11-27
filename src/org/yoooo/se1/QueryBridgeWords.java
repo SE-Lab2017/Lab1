@@ -13,7 +13,7 @@ public final class QueryBridgeWords {
      * @param targetWord target word
      * @return List of bridge words
      */
-    public static List<String> getBridgeWords(final String sourceWord, final String targetWord) {
+    public List<String> getBridgeWords(final String sourceWord, final String targetWord) {
         Graph<String, Integer> graph = Application.getInstance().getGraph();
         Set<String> vertexSet = graph.vertexSet();
         if (!vertexSet.contains(sourceWord) || !vertexSet.contains(targetWord)) {
@@ -37,7 +37,7 @@ public final class QueryBridgeWords {
      * @param word2 target word
      * @return result String
      */
-    public static String queryBridgeWords(final String word1, final String word2) {
+    public String queryBridgeWords(final String word1, final String word2) {
         Graph<String, Integer> graph = Application.getInstance().getGraph();
         boolean exist1 = graph.vertexSet().contains(word1), exist2 = graph.vertexSet().contains(word2);
         if (!exist1 && !exist2) {
@@ -69,7 +69,5 @@ public final class QueryBridgeWords {
         result.append(i.next());
         result.append(".");
         return result.toString();
-    }
-    private QueryBridgeWords() {
     }
 }

@@ -23,7 +23,7 @@ public final class CalcShortestPath {
             return sink + " does not exist";
         }
         if (source.equals(sink)) {
-            ShowDirectedGraph.showDirectedGraph(Application.getInstance().getGraph(),
+            new ShowDirectedGraph(Application.getInstance().getGraph()).showDirectedGraph(
                     UUID.randomUUID().toString(), Collections.singleton(source),
                     Collections.emptySet());
             return source;
@@ -34,7 +34,7 @@ public final class CalcShortestPath {
         if (path == null) {
             return "Unreachable";
         }
-        ShowDirectedGraph.showDirectedGraph(Application.getInstance().getGraph(),
+        new ShowDirectedGraph(Application.getInstance().getGraph()).showDirectedGraph(
                 UUID.randomUUID().toString(), new HashSet<>(path.getVertexList()),
                 new HashSet<>(path.getEdgeList()));
         return String.join("->", path.getVertexList());

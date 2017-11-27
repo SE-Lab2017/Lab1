@@ -35,6 +35,7 @@ public final class Application {
     private static final int BUFFER_SIZE = 0x10000;
     private Graph<String, Integer> mGraph;
     private Random mRandom = new Random(System.currentTimeMillis());
+
     /**
      * Entry point for entire application. Should only be called from main.
      *
@@ -108,14 +109,14 @@ public final class Application {
                                 currentVertex = mGraph.getEdgeSource(predecessorMap.get(currentVertex));
                             }
                             System.out.print(source);
-                            for (ListIterator<String> iterator = path.listIterator(path.size()); iterator.hasPrevious();) {
+                            for (ListIterator<String> iterator = path.listIterator(path.size()); iterator.hasPrevious(); ) {
                                 System.out.print("->" + iterator.previous());
                             }
                             System.out.println();
                         }
                         Set<String> vertices = new HashSet<>(predecessorMap.keySet());
                         vertices.add(source);
-                        ShowDirectedGraph.showDirectedGraph(getGraph(),
+                        new ShowDirectedGraph(getGraph()).showDirectedGraph(
                                 UUID.randomUUID().toString(), vertices,
                                 new HashSet<>(predecessorMap.values()));
                     } catch (IllegalArgumentException e) {

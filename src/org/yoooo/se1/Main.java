@@ -15,7 +15,7 @@ public final class Main {
     }
 
     public static String queryBridgeWords(final String word1, final String word2) {
-        return QueryBridgeWords.queryBridgeWords(word1, word2);
+        return new QueryBridgeWords().queryBridgeWords(word1, word2);
     }
 
     public static String generateNewText(final String inputText) {

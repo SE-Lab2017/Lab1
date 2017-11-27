@@ -34,9 +34,10 @@ public final class RandomWalk {
             }
             visited.add(edge);
         }
-        ShowDirectedGraph.showDirectedGraph(graph, UUID.randomUUID().toString(), new HashSet<>(result), visited);
+        new ShowDirectedGraph(graph).showDirectedGraph(UUID.randomUUID().toString(), new HashSet<>(result), visited);
         return String.join(" ", result);
     }
+
     private RandomWalk() {
     }
 }
