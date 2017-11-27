@@ -97,7 +97,7 @@ public final class Application {
                     try {
                         String source = scanner.next();
                         SingleSourcePaths<String, Integer> paths =
-                                CalcShortestPath.calcShortestPath(source);
+                                new CalcShortestPath().calcShortestPath(source);
                         Map<String, Integer> predecessorMap = paths.getPredecessorMap();
                         List<String> words = new ArrayList<>(predecessorMap.keySet());
                         Collections.sort(words);

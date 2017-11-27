@@ -23,7 +23,7 @@ public final class Main {
     }
 
     public static String calcShortestPath(final String source, final String sink) {
-        return CalcShortestPath.calcShortestPath(source, sink);
+        return new CalcShortestPath().calcShortestPath(source, sink);
     }
 
     public static String randomWalk() {

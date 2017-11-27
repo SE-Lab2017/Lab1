@@ -14,7 +14,7 @@ public final class CalcShortestPath {
      * @param sink   sink vertex
      * @return shortest path represented by vertices joined by "->"
      */
-    public static String calcShortestPath(final String source, final String sink) {
+    public String calcShortestPath(final String source, final String sink) {
         Set<String> vertices = Application.getInstance().getGraph().vertexSet();
         if (!vertices.contains(source)) {
             return source + " does not exist";
@@ -46,7 +46,7 @@ public final class CalcShortestPath {
      * @param source source vertex
      * @return shortest path to other vertices
      */
-    public static SingleSourcePaths<String, Integer> calcShortestPath(final String source) {
+    public SingleSourcePaths<String, Integer> calcShortestPath(final String source) {
         Set<String> vertices = Application.getInstance().getGraph().vertexSet();
         if (!vertices.contains(source)) {
             throw new IllegalArgumentException(source + " does not exist");
@@ -54,7 +54,5 @@ public final class CalcShortestPath {
         DijkstraShortestPath<String, Integer> algorithm = new DijkstraShortestPath<>(
                 Application.getInstance().getGraph());
         return algorithm.getPaths(source);
-    }
-    private CalcShortestPath() {
     }
 }
