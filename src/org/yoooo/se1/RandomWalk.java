@@ -14,7 +14,7 @@ public final class RandomWalk {
      *
      * @return random trail represented by vertices joined by spaces.
      */
-    public static String randomWalk() {
+    public String randomWalk() {
         Graph<String, Integer> graph = Application.getInstance().getGraph();
         String[] vertices = graph.vertexSet().toArray(new String[0]);
         List<String> result = new ArrayList<>();
@@ -36,8 +36,5 @@ public final class RandomWalk {
         }
         new ShowDirectedGraph(graph).showDirectedGraph(UUID.randomUUID().toString(), new HashSet<>(result), visited);
         return String.join(" ", result);
-    }
-
-    private RandomWalk() {
     }
 }

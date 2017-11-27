@@ -27,6 +27,6 @@ public final class Main {
     }
 
     public static String randomWalk() {
-        return RandomWalk.randomWalk();
+        return new RandomWalk().randomWalk();
     }
 }
