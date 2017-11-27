@@ -19,7 +19,7 @@ public final class Main {
     }
 
     public static String generateNewText(final String inputText) {
-        return GenerateNewText.generateNewText(inputText);
+        return new GenerateNewText().generateNewText(inputText);
     }
 
     public static String calcShortestPath(final String source, final String sink) {

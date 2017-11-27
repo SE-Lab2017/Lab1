@@ -1,21 +1,20 @@
 package org.yoooo.se1test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.lang.reflect.Method;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.yoooo.se1.Application;
 import org.yoooo.se1.GenerateNewText;
+
+import java.lang.reflect.Method;
+
+import static org.junit.Assert.fail;
 
 public class GenerateNewTextTest4 {
 
     private String text = "the and";
     private String preprocessedText = null;
     private String[] expected = {"the rubbish and", "the environment and"};
-    
+
     @Before
     public void setUp() throws Exception {
         Application obj = Application.getInstance();
@@ -24,11 +23,11 @@ public class GenerateNewTextTest4 {
         cifc.setAccessible(true);
         preprocessedText = (String) cifc.invoke(obj, text);
     }
-    
+
     @Test
     public void test() {
         boolean equal = false;
-        String actual = GenerateNewText.generateNewText(preprocessedText);
+        String actual = new GenerateNewText().generateNewText(preprocessedText);
         for (int i = 0; i < expected.length; ++i) {
             if (actual != null && actual.equals(expected[i])) {
                 equal = true;
@@ -36,7 +35,7 @@ public class GenerateNewTextTest4 {
             }
         }
         if (equal) {
-            
+
         } else {
             StringBuilder alert = new StringBuilder();
             alert.append(String.format("expected \"%s\"", expected[0]));
@@ -47,5 +46,5 @@ public class GenerateNewTextTest4 {
             fail(alert.toString());
         }
     }
-    
+
 }

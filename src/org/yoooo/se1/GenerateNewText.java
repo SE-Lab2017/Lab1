@@ -10,7 +10,7 @@ public final class GenerateNewText {
      * @param inputText input text
      * @return new text
      */
-    public static String generateNewText(final String inputText) {
+    public String generateNewText(final String inputText) {
         String[] words = inputText.split(" ");
         if (words.length < 2) {
             return inputText;
@@ -27,7 +27,5 @@ public final class GenerateNewText {
             result.append(words[i]);
         }
         return result.toString();
-    }
-    private GenerateNewText() {
     }
 }
