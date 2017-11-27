@@ -8,23 +8,33 @@ import java.io.IOException;
 import java.util.Set;
 
 public final class ShowDirectedGraph {
+    private Graph<String, Integer> mGraph;
+
+    /**
+     * Show a directed graph.
+     *
+     * @param graph graph to be shown
+     */
+    public ShowDirectedGraph(Graph<String, Integer> graph) {
+        mGraph = graph;
+    }
+
     /**
      * Converts a graph to dot file.
      *
-     * @param graph graph to convert
      * @param coloredVertex vertices to color
-     * @param coloredEdge edges to color
+     * @param coloredEdge   edges to color
      * @return content of dot file
      */
-    private static String getDotContent(final Graph<String, Integer> graph, final Set<String> coloredVertex, final Set<Integer> coloredEdge) {
+    private String getDotContent(final Set<String> coloredVertex, final Set<Integer> coloredEdge) {
         StringBuilder dotContent = new StringBuilder();
         dotContent.append(String.format("digraph {%n"));
-        Set<String> vertexSet = graph.vertexSet();
+        Set<String> vertexSet = mGraph.vertexSet();
         for (String currentVertex : vertexSet) {
-            Set<Integer> outgoingEdges = graph.outgoingEdgesOf(currentVertex);
+            Set<Integer> outgoingEdges = mGraph.outgoingEdgesOf(currentVertex);
             for (Integer currentEdge : outgoingEdges) {
-                dotContent.append(String.format("\t\"%s\" -> \"%s\"", currentVertex, graph.getEdgeTarget(currentEdge)));
-                dotContent.append(String.format(" [label = \"%.0f\"]", graph.getEdgeWeight(currentEdge)));
+                dotContent.append(String.format("\t\"%s\" -> \"%s\"", currentVertex, mGraph.getEdgeTarget(currentEdge)));
+                dotContent.append(String.format(" [label = \"%.0f\"]", mGraph.getEdgeWeight(currentEdge)));
                 if (coloredEdge != null && coloredEdge.contains(currentEdge)) {
                     dotContent.append(" [style = bold, color = dodgerblue]");
                 }
@@ -43,17 +53,16 @@ public final class ShowDirectedGraph {
     /**
      * Saves a graph with vertices/edges colored to filename.png and open it.
      *
-     * @param graph graph to show
-     * @param filename filename of generated picture(without extension)
+     * @param filename      filename of generated picture(without extension)
      * @param coloredVertex vertices to color
-     * @param coloredEdge edges to color
-     * @exception RuntimeException throw when file operation failed
+     * @param coloredEdge   edges to color
+     * @throws RuntimeException throw when file operation failed
      */
-    public static void showDirectedGraph(final Graph<String, Integer> graph, final String filename,
-                                         final Set<String> coloredVertex, final Set<Integer> coloredEdge) {
+    public void showDirectedGraph(final String filename,
+            final Set<String> coloredVertex, final Set<Integer> coloredEdge) {
         try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(filename + ".dot"), "UTF-8")) {
             try {
-                writer.write(getDotContent(graph, coloredVertex, coloredEdge));
+                writer.write(getDotContent(coloredVertex, coloredEdge));
             } catch (IOException e) {
                 throw new NoticeException("fail to write " + filename + ".dot");
             }
@@ -71,16 +80,14 @@ public final class ShowDirectedGraph {
             throw new NoticeException("fail to write " + filename + ".png");
         }
     }
+
     /**
      * Saves a graph to filename.png and open it.
      *
-     * @param graph graph to show
      * @param filename filename of generated picture(without extension)
-     * @exception RuntimeException throw when file operation failed
+     * @throws RuntimeException throw when file operation failed
      */
-    public static void showDirectedGraph(final Graph<String, Integer> graph, final String filename) {
-        showDirectedGraph(graph, filename, null, null);
-    }
-    private ShowDirectedGraph() {
+    public void showDirectedGraph(final String filename) {
+        showDirectedGraph(filename, null, null);
     }
 }

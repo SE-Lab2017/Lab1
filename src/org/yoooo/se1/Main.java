@@ -11,7 +11,7 @@ public final class Main {
     private Main() {
     }
     public static void showDirectedGraph(final Graph<String, Integer> graph, final String path) {
-        ShowDirectedGraph.showDirectedGraph(graph, path);
+        new ShowDirectedGraph(graph).showDirectedGraph(path);
     }
 
     public static String queryBridgeWords(final String word1, final String word2) {
